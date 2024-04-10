@@ -1,0 +1,105 @@
+# NK-HanDic: morphological analysis dictionary for North Korean language
+
+NK-HanDic(북한딕)は，形態素解析エンジン[MeCab](https://taku910.github.io/mecab/)で現代韓国語を解析するための辞書です．12万を超える辞書項目，로동신문（労働新聞）など，書きことばを中心とした学習用データで構築されています．
+
+著作権の問題があるため学習用データ自体の配布はしませんが，学習用モデルファイルはパッケージに含まれています．
+
+## Requirements
+
+  - MeCab
+  - Python or Perl
+
+## Installation
+
+git clone
+
+```console
+$ git clone https://github.com/okikirmui/nkhandic.git
+```
+
+もしくはZIPファイルをダウンロード
+
+cloneしたリポジトリ配下のseedディレクトリに移動
+
+```console
+$ cd nkhandic/seed/
+```
+
+ZIPファイルをダウンロードした場合は解凍し，seedディレクトリに移動
+
+```console
+$ cd nkhandic-master/seed/
+```
+
+バイナリ辞書の作成
+
+```console
+$ /usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
+```
+
+パラメータ学習用のモデルファイル`model`が同梱されているので，それを使って配布用辞書を作成（インストール先が`/usr/local/lib/mecab/dic/nkhandic`の場合）
+
+```console
+$ /usr/local/libexec/mecab/mecab-dict-gen -o /usr/local/lib/mecab/dic/nkhandic -m model
+```
+
+解析用バイナリ辞書の作成
+
+```console
+$ cd /usr/local/lib/mecab/dic/nkhandic
+$ /usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
+```
+
+## Usage
+
+### 実行時に辞書を指定する
+
+MeCab実行時に`-d`オプションでHanDic辞書ファイルのあるディレクトリを指定します．
+
+```console
+$ mecab -d /usr/local/lib/mecab/dic/nkhandic
+```
+
+この方法では，実行するたびに辞書を指定する必要があります．
+
+### 設定ファイルで辞書を指定する
+
+ホームディレクトリに`.mecabrc`を作成して，`dicdir`にHanDic辞書ファイルのあるディレクトリを記述します．
+
+```text
+dicdir = /usr/local/lib/mecab/dic/nkhandic
+```
+
+この方法では，常にNK-HanDicを使って解析することになります．
+
+### 入力を与える
+
+NK-HanDicは，UTF-8エンコーディングされたテキストを入力として形態素解析を行います．
+また，入力は通常のハングル（Hangul Syllables「ハングル音節文字」領域の文字，いわゆる「完成型ハングル」）ではなく，初声・中声・終声の字母に分解した入力（Hangul Jamo「ハングル字母」領域の文字）である必要があります．
+例えば完成型ハングルの「몸」（U+BAB8）は，字母に分解すると「ㅁ」（U+1106）「ㅗ」（U+1169）「ㅁ」（U+11B7）となります．
+
+こうした字母への分解は，任意のスクリプトを使って行っても構いません．なお，本プロジェクトでは`tools`ディレクトリにPerl用スクリプト`k2jamo.pl`とPython用スクリプト`k2jamo.py`を同梱しています．
+
+コマンドラインやターミナルで，`k2jamo.pl`を使って`input.txt`（例）を解析する場合：
+
+```console
+$ perl k2jamo.pl input.txt | mecab -d /usr/local/lib/mecab/dic/nkhandic
+```
+
+あるいはコマンドラインやターミナルで直接入力をする場合：
+
+```console
+$ echo "겨울 방학 때 뭐 했어요?" | perl k2jamo.pl | mecab -d /usr/local/lib/mecab/dic/nkhandic
+```
+
+のように行うことができます．
+
+## Author
+
+  - Yoshinori Sugai(Kindai University)
+
+## Copyrights
+
+Copyright (c) 2024- Yoshinori Sugai. All rights reserved.
+
+''NK-HanDic'' is under [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause).
