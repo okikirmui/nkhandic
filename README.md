@@ -54,7 +54,7 @@ $ /usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
 
 ### 実行時に辞書を指定する
 
-MeCab実行時に`-d`オプションでHanDic辞書ファイルのあるディレクトリを指定します．
+MeCab実行時に`-d`オプションでNK-HanDic辞書ファイルのあるディレクトリを指定します．
 
 ```console
 $ mecab -d /usr/local/lib/mecab/dic/nkhandic
@@ -64,7 +64,7 @@ $ mecab -d /usr/local/lib/mecab/dic/nkhandic
 
 ### 設定ファイルで辞書を指定する
 
-ホームディレクトリに`.mecabrc`を作成して，`dicdir`にHanDic辞書ファイルのあるディレクトリを記述します．
+ホームディレクトリに`.mecabrc`を作成して，`dicdir`にNK-HanDic辞書ファイルのあるディレクトリを記述します．
 
 ```text
 dicdir = /usr/local/lib/mecab/dic/nkhandic
