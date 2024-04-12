@@ -109,6 +109,8 @@ ALPHA	1 1 0
 0x3000..0x303F  SYMBOL # CJK Symbol and Punctuation
 0xFE30..0xFE4F  SYMBOL # CJK Compatibility Forms
 0xFE50..0xFE6B  SYMBOL # Small Form Variants
-0xFF01..0xFF20  SYMBOL # Half width and Full width forms
+0xFF01..0xFF0F  SYMBOL # Half width and Full width forms
+0xFF10..0xFF19  NUMBER # Full width number
+0xFF1A..0xFF20  SYMBOL # Half width and Full width forms
 
 # END OF TABLE
