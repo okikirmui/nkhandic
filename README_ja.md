@@ -1,6 +1,6 @@
 # NK-HanDic: morphological analysis dictionary for North Korean language
 
-[한국어판 문서](pos_detail.md)
+[한국어 Readme](README.md)
 
 NK-HanDic(북한딕)は，形態素解析エンジン「[MeCab](https://taku910.github.io/mecab/)」で朝鮮民主主義人民共和国の言語（ここでは「朝鮮語」と呼ぶことにします）を解析するための辞書です．
 20万を超える項目で構成されており，「로동신문」（労働新聞）や北朝鮮の朝鮮語教材など，書きことばを中心としたデータで学習，構築されています．
