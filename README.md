@@ -40,7 +40,7 @@ Binary 사전 작성
 $ /usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
 ```
 
-파라미터 학습용 모델 파일 `model`을 사용하여 배포용 사전을 작성(`/usr/local/lib/mecab/dic/nkhandic`에 설치한 경우)
+파라미터 학습용 모델 파일 `model`을 사용하여 배포용 사전을 작성(`/usr/local/lib/mecab/dic/nkhandic`에 설치할 경우)
 
 ```console
 $ /usr/local/libexec/mecab/mecab-dict-gen -o /usr/local/lib/mecab/dic/nkhandic -m model
@@ -109,7 +109,21 @@ $ echo "겨울 방학 때 뭐 했어요?" | perl k2jamo.pl | mecab -d /usr/local
 ### 사전 구축 방법
 
 사전 구축에 있어서 MeCab의 재학습(再學習) 기능([オリジナル辞書/コーパスからのパラメータ推定(일본어)](https://taku910.github.io/mecab/learn.html) 참조)을 이용하였습니다.
-HanDic 사전 데이터에 아래에서 설명하는 조선어 항목(`z_NK.csv`)을 추가하여 HanDic 학습 모델을 바탕으로 조선어 데이터를 가지고 재학습하였습니다.
+현대 한국어 분석 사전 [HanDic](https://github.com/okikirmui/handic) 데이터에 아래에서 설명하는 조선어 항목(`z_NK.csv`)을 추가하여 HanDic 학습 모델을 바탕으로 조선어 데이터를 가지고 재학습하였습니다.
+구체적인 절차는 다음과 같습니다.
+
+```console
+# mecab-dict-index 처리 후
+# handic_model: HanDic 학습 모델, corpus.txt: 조선어 학습 데이터
+# 모든 파일이 같은 디렉토리에 있다고 가정
+# 재학습 실행
+/usr/local/libexec/mecab/mecab-cost-train -p 2 -M handic_model -c 1.0 corpus.txt model
+# 배포용 사전 작성(final 디렉토리에 출력할 경우)
+/usr/local/libexec/mecab/mecab-dict-gen -o final -d . -m model
+# 분석용 binary 사전 작성
+cd final
+/usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
+```
 
 재학습에 사용한 조선어 데이터는 아래와 같습니다(2466 문장).
 
@@ -168,5 +182,4 @@ HanDic 사전 데이터에 아래에서 설명하는 조선어 항목(`z_NK.csv`
 
 Copyright (c) 2024- Yoshinori Sugai. All rights reserved.
 
-''NK-HanDic'' is under BSD-3-Clause.
-<!-- [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause). -->
+''NK-HanDic'' is under [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause).
