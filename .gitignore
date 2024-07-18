@@ -3,4 +3,3 @@ corpus
 *.dic
 training_result.txt
 .DS_Store
-README_ja.md
