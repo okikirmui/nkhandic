@@ -53,6 +53,8 @@ $ cd /usr/local/lib/mecab/dic/nkhandic
 $ /usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
 ```
 
+분석할 때 실제로 필요한 파일은 `char.bin`, `dicrc`, `matrix.bin`, `sys.dic`, `unk.dic`입니다.
+
 ## 사용법
 
 ### 실행시 사전을 지정
@@ -166,4 +168,5 @@ HanDic 사전 데이터에 아래에서 설명하는 조선어 항목(`z_NK.csv`
 
 Copyright (c) 2024- Yoshinori Sugai. All rights reserved.
 
-''NK-HanDic'' is under [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause).
+''NK-HanDic'' is under BSD-3-Clause.
+<!-- [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause). -->
