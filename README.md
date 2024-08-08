@@ -125,12 +125,14 @@ cd final
 /usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
 ```
 
-재학습에 사용한 조선어 데이터는 아래와 같습니다(2466 문장).
+재학습에 사용한 조선어 데이터는 아래와 같습니다(3,005 문장).
 
 #### 로동신문
 
-[홈페이지](http://www.rodong.rep.kp/ko/)의 "사회문화생활" 분야 기사 리스트에서 각일 맨 처음에 게시된 기사를 선택했습니다.
+[홈페이지](http://www.rodong.rep.kp/ko/)의 "사회문화생활" 분야 및 "진전하는 조선" 분야의 기사 리스트에서 각일 맨 처음에 게시된 기사를 선택했습니다.
 해당 기사가 너무 긴 경우에는 그 다음 기사를 선택했고, 당일 기사가 하나밖에 없는 경우에는 해당 기사를 선택했습니다.
+
+##### 사회문화생활
 
   1. [고조되는 교육지원열의(2024/4/1, 5면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNC0wMS1OMDI1QDVAMUBAMEAxMw==)
   1. [전국식료품전시회-2024 폐막(2024/4/3, 4면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNC0wMy1OMDE0QDVAMUBAMEAxMA==)
@@ -157,6 +159,26 @@ cd final
   1. [한없이 소중한 내 고향, 내 조국을 위해(2024/5/11, 4면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNS0xMS1OMDE2QDVAMkBAMEAyMw==)
   1. [사회주의농촌에 펼쳐진 새 문명(2024/5/12, 5면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNS0xMi1OMDI3QDVAMkBAMEAyMg==)
 
+##### 전진하는 조선
+
+  1. [지방공업공장들의 골조공사 련이어 결속(2024/6/1, 1면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNi0wMS1OMDAxQDRANEBAMEA0OA==)
+  1. [검덕지구의 산악협곡도시건설을 추진(2024/6/2, 5면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNi0wMi1OMDA3QDRANEBAMEA0Ng==)
+  1. [당의 대자연개조구상실현에서 이룩된 자랑찬 성과(2024/6/2, 5면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNi0wMy1OMDE3QDRAM0BAMEA0NQ==)
+  1. [올해 계획된 농촌살림집건설에서 전국의 앞장에 섰다(2024/6/4, 1면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNi0wNC1OMDAyQDRAM0BAMEA0Mw==)
+  1. [대중운동의 불길속에 더욱 강해지는 소년단원들의 장한 대오(2024/6/6, 3면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNi0wNi1OMDA5QDRAM0BAMEA0Mg==)
+  1. [철강재생산토대를 가일층 강화해나간다(2024/6/8, 1면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNi0wOC1OMDAzQDRAM0BAMEA0MA==)
+  1. [당의 지방공업발전정책관철을 위해 한결같이 떨쳐나섰다(2024/6/9, 1면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNi0wOS1OMDAyQDRAM0BAMEAzOA==)
+  1. [１２개 중요고지점령을 위한 투쟁의 전렬에서 기간공업부문이 기세차게 내달린다(2024/6/10, 1면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNi0xMC1OMDAyQDRAM0BAMEAzNw==)
+  1. [특파기자들이 보내온 소식(2024/6/11, 4면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNi0xMS1OMDE2QDRAM0BAMEAzNg==)
+  1. [조선중앙통신사 보도 사회주의농촌진흥을 가속화하며 련이어 이룩되는 수리화의 변혁적성과(2024/6/12, 3면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNi0xMi1OMDEyQDRAM0BAMEAzNA==)
+  1. [지방공업혁명의 전구마다에 결사관철의 기상 나래친다(2024/6/13, 1면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNi0xMy1OMDA1QDRAM0BAMEAzMw==)
+  1. [북방의 철의 기지가 철강재생산에서 장훈을 불렀다(2024/6/14, 1면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNi0xNC1OMDAxQDRAM0BAMEAzMg==)
+  1. [새 기준, 새 기록창조로 날이 밝고 해가 저문다(2024/6/15, 1면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNi0xNS1OMDAxQDRAM0BAMEAzMQ==)
+  1. [지방의 전면적진흥을 안아오기 위한 우리당 １０년목표실행의 돌파구 개척(2024/6/17, 1면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNi0xNy1OMDAxQDRAMkBAMEAzMA==)
+  1. [당정책의 생활력을 과시하며 황남의 대지에 전례없는 밀, 보리풍작이 들었다(2024/6/21, 1면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNi0yMS1OMDAxQDRAMkBAMEAyOQ==)
+  1. [사회주의전야에서 련일 전해지는 흐뭇한 밀, 보리수확소식(2024/6/24, 1면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNi0yNC1OMDAzQDRAMkBAMEAyOA==)
+  1. [새로운 건설신화를 끊임없이 창조해간다(2024/6/28, 1면)](http://www.rodong.rep.kp/ko/index.php?MTJAMjAyNC0wNi0yOC1OMDAyQDRAMkBAMEAyNg==)
+
 #### 조선어 교재
 
 각 교재의 대화문이나 강독문을 사용했습니다.
@@ -173,6 +195,8 @@ cd final
   - [통일부 북한정보포털](https://nkinfo.unikorea.go.kr/nkp/word/nkword.do): ‘북한 지도’에서 ‘백화점’, ‘상점’, ‘휴양소’, ‘호텔’, ‘려관’, ‘야영소’, ‘대학’ 등의 검색어로 검색된 항목
   - 통일부 북한정보포털에서 취득한 『북한 기관별 인명록(별책)』 2022에 기재된 기관명 일부
   - 현대 한국어 분석 사전 [HanDic](https://github.com/okikirmui/handic) 데이터 중 용언의 일부를 수정
+
+『조선말대사전』(2017년)도 참조하여 추가한 항목도 있습니다.
 
 ## Author
 
