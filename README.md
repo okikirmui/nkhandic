@@ -117,12 +117,12 @@ $ echo "겨울 방학 때 뭐 했어요?" | perl k2jamo.pl | mecab -d /usr/local
 # handic_model: HanDic 학습 모델, corpus.txt: 조선어 학습 데이터
 # 모든 파일이 같은 디렉토리에 있다고 가정
 # 재학습 실행
-/usr/local/libexec/mecab/mecab-cost-train -p 2 -M handic_model -c 1.0 corpus.txt model
+$ /usr/local/libexec/mecab/mecab-cost-train -p 2 -M handic_model -c 1.0 corpus.txt model
 # 배포용 사전 작성(final 디렉토리에 출력할 경우)
-/usr/local/libexec/mecab/mecab-dict-gen -o final -d . -m model
+$ /usr/local/libexec/mecab/mecab-dict-gen -o final -d . -m model
 # 분석용 binary 사전 작성
-cd final
-/usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
+$ cd final
+$ /usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
 ```
 
 재학습에 사용한 조선어 데이터는 아래와 같습니다(3,005 문장).

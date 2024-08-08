@@ -115,12 +115,12 @@ $ echo "겨울 방학 때 뭐 했어요?" | perl k2jamo.pl | mecab -d /usr/local
 # handic_model：HanDic学習用モデル，corpus.txt：朝鮮語学習用データ
 # 全てのファイルが同じディレクトリにあるという場合
 # 再学習実行
-/usr/local/libexec/mecab/mecab-cost-train -p 2 -M handic_model -c 1.0 corpus.txt model
+$ /usr/local/libexec/mecab/mecab-cost-train -p 2 -M handic_model -c 1.0 corpus.txt model
 # 配布用辞書の作成（finalディレクトリに出力する場合）
-/usr/local/libexec/mecab/mecab-dict-gen -o final -d . -m model
+$ /usr/local/libexec/mecab/mecab-dict-gen -o final -d . -m model
 # 解析用バイナリ辞書作成
-cd final
-/usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
+$ cd final
+$ /usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
 ```
 
 再学習に使用した朝鮮語データは以下のとおりです（3,005文）．
