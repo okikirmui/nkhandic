@@ -98,6 +98,16 @@ $ perl k2jamo.pl input.txt | mecab -d /usr/local/lib/mecab/dic/nkhandic
 $ echo "겨울 방학 때 뭐 했어요?" | perl k2jamo.pl | mecab -d /usr/local/lib/mecab/dic/nkhandic
 ```
 
+### トークン化(tokenize)
+
+出力フォーマットを指定する`-O`オプションを用いることで，トークン化処理を行うことが出来ます．
+出力フォーマットとして，`tokenize`を指定します．
+
+```console
+$ echo "모든 치료조건과 환경이 그쯘하게 갖추어진 료양소의 구내에 야외휴식터를 번듯하게 꾸리고 수종이 좋은 나무들과 꽃관목들로 이채로운 원림경관을 조성하여 주변풍치를 한껏 돋구었다." | perl k2jamo.pl | mecab -d /usr/local/lib/mecab/dic/nkhandic -O tokenize
+모든 치료 조건 과 환경 이 그쯘하 게 갖추어 지 ㄴ 료양소 의 구내 에 야외 휴식터 를 번듯 하 게 꾸리 고 수종 이 좋으 ㄴ 나무 들 과 꽃 관목 들 로 이채 로우 ㄴ 원림 경관 을 조성 하여 주변 풍치 를 한껏 돋구어 ㅆ 다 .
+```
+
 ## 品詞に関する情報
 
 品詞に関する情報については，[品詞情報](pos_detail.md)文書を参照してください．
