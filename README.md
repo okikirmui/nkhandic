@@ -122,15 +122,12 @@ $ echo "모든 치료조건과 환경이 그쯘하게 갖추어진 료양소의 
 현대 한국어 분석 사전 [HanDic](https://github.com/okikirmui/handic) 데이터에 아래에서 설명하는 조선어 항목(`z_NK.csv`)을 추가하여 HanDic 학습 모델을 바탕으로 조선어 데이터를 가지고 재학습하였습니다.
 구체적인 절차는 다음과 같습니다.
 
+mecab-dict-index 처리 후, 재학습 실행. 모든 파일이 같은 디렉토리에 있는 경우.
+`handic_model`: HanDic 학습 모델, `corpus.txt`: 조선어 학습 데이터
+
 ```console
-# mecab-dict-index 처리 후
-# handic_model: HanDic 학습 모델, corpus.txt: 조선어 학습 데이터
-# 모든 파일이 같은 디렉토리에 있다고 가정
-# 재학습 실행
 $ /usr/local/libexec/mecab/mecab-cost-train -p 2 -M handic_model -c 1.0 corpus.txt model
-# 배포용 사전 작성(final 디렉토리에 출력할 경우)
 $ /usr/local/libexec/mecab/mecab-dict-gen -o final -d . -m model
-# 분석용 binary 사전 작성
 $ cd final
 $ /usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
 ```
@@ -142,9 +139,9 @@ $ /usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
 | 로동신문     | 사회문화생활  |     24|      428|
 |            | 전진하는 조선  |     17|     538|
 |            | 사설 |     18|     325|
-| 조선어 교재  |         |    5|           2,042|
+| 조선어 교재  |         |    6|           2,604|
 | 잡지 "조선문학" |  단편소설   |    4 |     200 |
-| 합계 |         |     |     3,533|
+| 합계 |         |     |     4,095|
 
 #### 로동신문
 
@@ -225,8 +222,9 @@ $ /usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
 
 각 교재의 대화문이나 강독문을 사용했습니다.
 
-  - 조선어기초(류학생용, 2017, 김형직사범대학): 제1과~제25과 회화문만 입력.
-  - 조선어2~5(류학생용, 2022, 김일성종합대학): 2/3권의 '1. 본문', 4/5권의 '대화본문' 및 '강독본문'만 입력. 
+  - 조선어회화1(류학생용, 2016, 김형직사범대학): 제1과~제14과 본문(각 과 2개씩) 입력. 562문장.
+  - 조선어기초(류학생용, 2017, 김형직사범대학): 제1과~제25과 회화문만 입력. 430문장.
+  - 조선어2~5(류학생용, 2022, 김일성종합대학): 2/3권의 '1. 본문', 4/5권의 '대화본문' 및 '강독본문'만 입력. 1,612문장.
 
 #### 소설
 
