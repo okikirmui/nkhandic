@@ -3,5 +3,3 @@ corpus
 *.dic
 training_result.txt
 .DS_Store
-pos_detail.md
-pos_detail_ja.md
