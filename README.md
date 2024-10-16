@@ -259,4 +259,4 @@ $ /usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
 
 Copyright (c) 2024- Yoshinori Sugai. All rights reserved.
 
-''NK-HanDic'' is under [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause).
+''NK-HanDic'' is under BSD-3-Clause.
