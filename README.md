@@ -198,6 +198,10 @@ $ /usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
 
   - Yoshinori Sugai(스가이 요시노리/須賀井義教, Kindai University)
 
+## Reference
+
+  - 스가이 요시노리(2024), `북한 조선어 형태소 분석 사전 구축에 관한 연구', 한국사전학 제44호, 서울: 한국사전학회, pp.33-63.
+
 ## Copyrights
 
 Copyright (c) 2024- Yoshinori Sugai. All rights reserved.
