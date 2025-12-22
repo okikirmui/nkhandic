@@ -12,6 +12,13 @@ NK-HanDic(북한딕)은 형태소 분석 엔진 [MeCab](https://taku910.github.i
   - MeCab
   - Python or Perl
 
+> ⚠️ **중요**
+>
+> NK-HanDic은 **완성형 한글을 입력으로 사용하지 않습니다.**  
+> 형태소 분석을 하기 전에 **반드시 Jamo(자모) 단위로 분해된 문자열**을 입력으로 사용해야 합니다.
+>
+> 자모 변환을 거치지 않은 입력에 대해서는 정상적인 분석 결과를 보장하지 않습니다.
+
 ## 설치
 
 git clone
@@ -39,6 +46,13 @@ Binary 사전 작성
 ```console
 $ /usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
 ```
+
+> ※ `mecab-dict-index`의 위치는 MeCab 설치 방식(Homebrew, apt, 소스 빌드 등)에 따라 다를 수 있습니다.  
+> 명령어를 찾을 수 없는 경우 다음 명령으로 libexec 경로를 확인하십시오.
+>
+> ```bash
+> mecab-config --libexecdir
+> ```
 
 파라미터 학습용 모델 파일 `model`을 사용하여 배포용 사전을 작성(`/usr/local/lib/mecab/dic/nkhandic`에 설치할 경우)
 
@@ -115,6 +129,8 @@ $ echo "모든 치료조건과 환경이 그쯘하게 갖추어진 료양소의 
 [PyPI](https://pypi.org/project/nkhandic/)에서 `nkhandic` 패키지를 공개했습니다.
 `mecab-python3` 패키지와 입력문을 변환하기 위한 `jamotools` 등의 패키지와 함께 사용합니다.
 
+> PyPI로 배포되는 `nkhandic` 패키지에는 **이미 빌드된 사전 디렉터리**가 포함되어 있으며, 별도로 사전을 구축할 필요가 없습니다.
+
 설치:
 
 ```bash
@@ -136,6 +152,7 @@ tokenizer.parse('')
 # 로동신문 2024년 5월 1일자 사설
 sentence = u'경애하는 총비서동지에 대한 절대적인 충성심을 지니고 당중앙의 구상과 결심을 철저한 실천행동으로 받들어나가야 한다.'
 
+# ⚠️ 반드시 Jamo(자모)로 변환한 문자열을 입력으로 사용해야 함
 jamo = jamotools.split_syllables(sentence, jamo_type="JAMO")
 
 node = tokenizer.parseToNode(jamo)
@@ -200,7 +217,7 @@ $ /usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
 
 ## Reference
 
-  - 스가이 요시노리(2024), `북한 조선어 형태소 분석 사전 구축에 관한 연구', 한국사전학 제44호, 서울: 한국사전학회, pp.33-63.
+  - 스가이 요시노리(2024), [`북한 조선어 형태소 분석 사전 구축에 관한 연구'](http://doi.org/10.33641/kolex.2024..44.33), 한국사전학 제44호, 서울: 한국사전학회, pp.33-63.
 
 ## Copyrights
 
