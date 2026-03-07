@@ -1,54 +1,78 @@
 # NK-HanDic: morphological analysis dictionary for North Korean language
 
-[한국어 Readme](README.md)
+한국어 Readme：[README.md](README.md)
 
 NK-HanDic(북한딕)は，形態素解析エンジン「[MeCab](https://taku910.github.io/mecab/)」で朝鮮民主主義人民共和国の言語（ここでは「朝鮮語」と呼ぶことにします）を解析するための辞書です．
-21万を超える項目で構成されており，「로동신문」（労働新聞）や北朝鮮の朝鮮語教材など，書きことばを中心としたデータで学習，構築されています．
+22万を超える項目で構成されており，「로동신문」（労働新聞）や北朝鮮の小説など，書きことばを中心としたデータで学習，構築されています．
 
 著作権の問題から学習データは公開しませんが，学習モデルをパッケージに同梱しています．
 
-## Requirements
+## Quick Start(Python / pip)
+
+Pythonパッケージの**`nkhandic`**を使えば，**辞書の構築なしに形態素解析を始める**ことができます．
+
+### パッケージのインストール
+
+```bash
+pip install nkhandic mecab-python3 jamotools
+```
+
+### 形態素解析の例
+
+```python
+import nkhandic
+
+text = "우리의 경애하는 총비서동지께서는 어쩌면 그리도 위대하신가."
+
+print(nkhandic.pos_tag(text))
+print(nkhandic.tokenize_hangul(text, mode="surface"))
+print(nkhandic.convert_text_to_hanja_hangul(text))
+```
+
+**出力**
+
+```python
+[('우리03', 'NP'), ('의10', 'JKG'), ('경애01', 'NNG'), ('하다02', 'XSV'), ('는03', 'ETM'), ('총비서', 'NNG'), ('동지006', 'NNG'), ('께서', 'JKS'), ('는01', 'JX'), ('어쩌면', 'MAG'), ('그리도', 'MAG'), ('위대02', 'XR'), ('하다02', 'XSA'), ('시', 'EP'), ('ㄴ가', 'EF'), ('.', 'SF')]
+['우리', '의', '경애', '하', '는', '총비서', '동지', '께서', '는', '어쩌면', '그리도', '위대', '하', '시', 'ㄴ가', '.']
+우리의 敬愛하는 總秘書同志께서는 어쩌면 그리도 偉大하신가.
+```
+
+### Pythonパッケージ（`nkhandic`）
+
+- PyPI: https://pypi.org/project/nkhandic/
+- MeCab用Pythonラッパー（`mecab-python3`），ハングル字母の処理パッケージ（`jamotools`）とともに使用
+
+## Dictionary Build
+
+Pythonを使わない場合，ローカルでMeCabを使って解析を行う場合，解析用のバイナリ辞書を構築する必要があります．
+
+### Requirements
 
   - MeCab
   - Python or Perl
 
-## インストール
+> ⚠️ **注意**
+>
+> NK-HanDicは**入力として完成型ハングルを使いません．**  
+> MeCabで形態素解析を行う前に**必ず字母（Jamo）単位に分解して**，入力としなければなりません．
+> 
+> 字母への変換を行わない場合，スペース区切りの文字列全体が記号として扱われてしまいます．
 
-git clone
+### 辞書構築の方法（要約）
 
-```console
-$ git clone https://github.com/okikirmui/nkhandic.git
-```
+`mecab-dict-index`，`mecab-dict-gen`などの位置は，`mecab-config --libexecdir`の出力を参照してください．
+以下では`/usr/local/libexec/mecab`にあると仮定しています．
 
-あるいはZIPファイルをダウンロード
-
-seedディレクトリに移動
-
-```console
-$ cd nkhandic/seed/
-```
-
-ZIPファイルの場合，解凍してseedディレクトリに移動
-
-```console
-$ cd nkhandic-master/seed/
-```
-
-バイナリ辞書の作成
-
-```console
-$ /usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
-```
-
-パラメータ学習用のモデルファイル`model`を使って，配布用辞書を作成（`/usr/local/lib/mecab/dic/nkhandic`にインストールする場合）
-
-```console
-$ /usr/local/libexec/mecab/mecab-dict-gen -o /usr/local/lib/mecab/dic/nkhandic -m model
-```
-
-解析用バイナリ辞書の作成
-
-```console
+```bash
+# git clone
+git clone https://github.com/okikirmui/nkhandic.git
+cd handic
+# バイナリ辞書の作成
+/usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
+# 学習済みのモデルファイル`model`を使って配布用辞書を作成
+# `/usr/local/lib/mecab/dic/nkhandic`ディレクトリに出力
+/usr/local/libexec/mecab/mecab-dict-gen -o /usr/local/lib/mecab/dic/nkhandic -m model
+# 解析用バイナリ辞書の作成
 $ cd /usr/local/lib/mecab/dic/nkhandic
 $ /usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
 ```
@@ -61,7 +85,7 @@ $ /usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
 
 MeCabの実行時に`-d`オプションで辞書ファイルへのパスを指定することができます．
 
-```console
+```bash
 $ mecab -d /usr/local/lib/mecab/dic/nkhandic
 ```
 
@@ -88,14 +112,14 @@ NK-HanDicはUTF-8エンコーディングされたテキストを入力として
 
 `k2jamo.pl`で`input.txt`を分析する場合：
 
-```console
+```bash
 $ perl k2jamo.pl input.txt | mecab -d /usr/local/lib/mecab/dic/nkhandic
 ```
 
 あるいは文を直接入力する場合：
 
-```console
-$ echo "겨울 방학 때 뭐 했어요?" | perl k2jamo.pl | mecab -d /usr/local/lib/mecab/dic/nkhandic
+```bash
+$ echo "다음과 같이 말씀하시였다." | perl k2jamo.pl | mecab -d /usr/local/lib/mecab/dic/nkhandic
 ```
 
 ### トークン化(tokenize)
@@ -103,61 +127,37 @@ $ echo "겨울 방학 때 뭐 했어요?" | perl k2jamo.pl | mecab -d /usr/local
 出力フォーマットを指定する`-O`オプションを用いることで，トークン化処理を行うことが出来ます．
 出力フォーマットとして，`tokenize`を指定します．
 
-```console
-$ echo "모든 치료조건과 환경이 그쯘하게 갖추어진 료양소의 구내에 야외휴식터를 번듯하게 꾸리고 수종이 좋은 나무들과 꽃관목들로 이채로운 원림경관을 조성하여 주변풍치를 한껏 돋구었다." | perl k2jamo.pl | mecab -d /usr/local/lib/mecab/dic/nkhandic -O tokenize
-모든 치료 조건 과 환경 이 그쯘하 게 갖추어 지 ㄴ 료양소 의 구내 에 야외 휴식터 를 번듯 하 게 꾸리 고 수종 이 좋으 ㄴ 나무 들 과 꽃 관목 들 로 이채 로우 ㄴ 원림 경관 을 조성 하여 주변 풍치 를 한껏 돋구어 ㅆ 다 .
-```
-
-## 使い方(Python)
-
-[PyPI](https://pypi.org/project/nkhandic/)にて`nkhandic`パッケージを公開しました．
-`mecab-python3`パッケージと，入力を変換するための`jamotools`といったパッケージと共に使います．
-
-インストール:
-
 ```bash
-pip install nkhandic mecab-python3 jamotools
+$ echo "다음과 같이 말씀하시였다." | perl k2jamo.pl | mecab -d /usr/local/lib/mecab/dic/nkhandic -O tokenize
 ```
 
-使用例:
+出力：
 
-```Python
-import MeCab
-import nkhandic
-import jamotools
-
-mecaboption = f'-r /dev/null -d {nkhandic.DICDIR}'
-
-tokenizer = MeCab.Tagger(mecaboption)
-tokenizer.parse('')
-
-# 労働新聞 2024年5月1日付け社説
-sentence = u'경애하는 총비서동지에 대한 절대적인 충성심을 지니고 당중앙의 구상과 결심을 철저한 실천행동으로 받들어나가야 한다.'
-
-jamo = jamotools.split_syllables(sentence, jamo_type="JAMO")
-
-node = tokenizer.parseToNode(jamo)
-while node:
-    print(node.surface, node.feature)
-    node = node.next
+```Text
+다음 과 같이 말씀 하 시여 ㅆ 다 .
 ```
 
 ## 品詞に関する情報
 
 品詞に関する情報については，[品詞情報](docs/pos_detail.md)文書を参照してください．
 
-## 辞書の構築と辞書項目
+## 辞書の学習と辞書項目
 
-### 辞書の構築方法
+### 辞書の学習方法
 
 辞書構築においてはMeCabの「再学習」機能（[オリジナル辞書/コーパスからのパラメータ推定](https://taku910.github.io/mecab/learn.html)を参照）を用いています．
 現代韓国語解析用辞書の「[HanDic](https://github.com/okikirmui/handic)」辞書データに，以下で説明する朝鮮語項目を`z_NK.csv`ファイルにまとめて追加し，HanDic学習モデルを元にして朝鮮語データで再学習しました．
 具体的には以下のような作業を行っています．
 
-```console
-# mecab-dict-indexを行った後
-# handic_model：HanDic学習用モデル，corpus.txt：朝鮮語学習用データ
-# 全てのファイルが同じディレクトリにあるという場合
+`mecab-dic-index`配布用辞書を作成したあと，再学習を実行します．
+すべてのファイルが同じディレクトリにあるとします．
+
+使用するデータは：
+
+- `handic_model`：HanDicのモデルファイル
+- `corpus.txt`：朝鮮語の再学習用コーパスデータ
+
+```bash
 # 再学習実行
 $ /usr/local/libexec/mecab/mecab-cost-train -p 2 -M handic_model -c 1.0 corpus.txt model
 # 配布用辞書の作成（finalディレクトリに出力する場合）
@@ -171,16 +171,20 @@ $ /usr/local/libexec/mecab/mecab-dict-index -f utf8 -t utf8
 
 再学習に使用した朝鮮語データの現況は以下のとおりです．
 
-| カテゴリ   |         | 記事・冊数 | 文数 |
+| 資料   |  分野  | 記事・冊数 | 文数 |
 |------------|---------|-------:|-----------:|
-| 労働新聞     | 社会文化生活  |     24|      428|
-|            | 前進する朝鮮   |     17|     538|
-|            | 社説 |     18|     325|
-|            | 日付別記事     |    167 |   2,769 |
-| 朝鮮語教材  |         |    24|           11,782|
-| 合計 |         |     |     15,842|
+| 労働新聞 | 社説 | 18 | 325 |
+|  | 日付別記事 | 295 | 5,192 |
+|  | 社会文化生活 | 24 | 428 |
+|  | 前進する挑戦 | 17 | 538 |
+| 朝鮮文学 | 小説 | 8 | 400 |
+| **合計** |   | **362** | **6,883** |
 
 詳しいリストは[学習用データ](docs/data_list_ja.md)を参照のこと．
+
+> **注意**
+>
+> 以前のバージョンでは，学習用データに朝鮮語教材なども多数含めていましたが，解析率などを比較した上で，現在は上記のような構成にしています．
 
 ### 辞書に登録した項目
 
