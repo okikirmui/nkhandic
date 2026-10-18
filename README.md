@@ -9,38 +9,49 @@ NK-HanDic(북한딕)은 형태소 분석 엔진 [MeCab](https://taku910.github.i
 
 ## Quick Start(Python / pip)
 
-Python 패키지 **`nkhandic`** 을 사용하면 **사전 파일 구축 없이 바로 형태소 분석을 시작**할 수 있습니다. 
+Python 패키지 **`handic`** 을 사용하면 **사전 파일 구축 없이 바로 형태소 분석을 시작**할 수 있습니다.
 
 ### 패키지 설치
 
 ```bash
-pip install nkhandic mecab-python3 jamotools
+pip install handic mecab-python3 jamotools
 ```
+
+### Binary 사전 다운로드
+
+[Releases](https://github.com/okikirmui/nkhandic/releases)에서 binary 사전을 다운받아서 적절한 장소에 압축을 풉니다.
 
 ### 형태소 분석 예제
 
+`dicdir`에 사전 경로를 지정합니다.
+
 ```python
-import nkhandic
+import handic
 
-text = "우리의 경애하는 총비서동지께서는 어쩌면 그리도 위대하신가."
+text = "경애하는 김정은동지께서는 다음과 같이 말씀하시였다."
+dicdir = "/path/to/NK-HanDic"
 
-print(nkhandic.pos_tag(text))
-print(nkhandic.tokenize_hangul(text, mode="surface"))
-print(nkhandic.convert_text_to_hanja_hangul(text))
+print(handic.pos_tag(text, dicdir=dicdir))
+print(handic.tokenize_hangul(text, mode="surface", dicdir=dicdir))
+print(handic.convert_text_to_hanja_hangul(text, dicdir=dicdir))
 ```
 
 **출력 결과**
 
 ```python
-[('우리03', 'NP'), ('의10', 'JKG'), ('경애01', 'NNG'), ('하다02', 'XSV'), ('는03', 'ETM'), ('총비서', 'NNG'), ('동지006', 'NNG'), ('께서', 'JKS'), ('는01', 'JX'), ('어쩌면', 'MAG'), ('그리도', 'MAG'), ('위대02', 'XR'), ('하다02', 'XSA'), ('시', 'EP'), ('ㄴ가', 'EF'), ('.', 'SF')]
-['우리', '의', '경애', '하', '는', '총비서', '동지', '께서', '는', '어쩌면', '그리도', '위대', '하', '시', 'ㄴ가', '.']
-우리의 敬愛하는 總秘書同志께서는 어쩌면 그리도 偉大하신가.
+[('경애01', 'NNG'), ('하다02', 'XSV'), ('는03', 'ETM'), ('김06', 'NNP'), ('정은', 'NNP'), ('동지006', 'NNG'), ('께서', 'JKS'), ('는01', 'JX'), ('다음01', 'NNG'), ('과12', 'JKB'), ('같이', 'MAG'), ('말씀', 'NNG'), ('하다02', 'XSV'), ('시', 'EP'), ('ㅆ', 'EP'), ('다06', 'EF'), ('.', 'SF')]
+['경애', '하', '는', '김', '정은', '동지', '께서', '는', '다음', '과', '같이', '말씀', '하', '시여', 'ㅆ', '다', '.']
+敬愛하는 金정은同志께서는 다음과 같이 말씀하시였다.
 ```
 
-### Python 패키지 (`nkhandic`)
+`dicdir`을 생략하면 `handic` 패키지에 포함된 현대 한국어 사전 **HanDic**이 사용됩니다.
 
-- PyPI: https://pypi.org/project/nkhandic/
+### Python 패키지 (`handic`)
+
+- GitHub: https://github.com/okikirmui/handic-py
+- PyPI: https://pypi.org/project/handic/
 - MeCab Python 래퍼(`mecab-python3`), 한글 처리 페키지(`jamotools`)와 함께 사용
+- 현대 한국어 분석 사전 **HanDic** 포함
 
 ## Dictionary Build
 

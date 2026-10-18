@@ -9,38 +9,49 @@ NK-HanDic(북한딕)は，形態素解析エンジン「[MeCab](https://taku910.
 
 ## Quick Start(Python / pip)
 
-Pythonパッケージの**`nkhandic`**を使えば，**辞書の構築なしに形態素解析を始める**ことができます．
+Pythonパッケージの**`handic`**を使えば，**辞書の構築なしに形態素解析を始める**ことができます．
 
 ### パッケージのインストール
 
 ```bash
-pip install nkhandic mecab-python3 jamotools
+pip install handic mecab-python3 jamotools
 ```
+
+### バイナリ辞書のダウンロード
+
+[Releases](https://github.com/okikirmui/nkhandic/releases)からバイナリ辞書をダウンロードし，適切な場所に解凍します．
 
 ### 形態素解析の例
 
+`dicdir`に辞書へのパスを指定します．
+
 ```python
-import nkhandic
+import handic
 
-text = "우리의 경애하는 총비서동지께서는 어쩌면 그리도 위대하신가."
+text = "경애하는 김정은동지께서는 다음과 같이 말씀하시였다."
+dicdir = "/path/to/NK-HanDic"
 
-print(nkhandic.pos_tag(text))
-print(nkhandic.tokenize_hangul(text, mode="surface"))
-print(nkhandic.convert_text_to_hanja_hangul(text))
+print(handic.pos_tag(text, dicdir=dicdir))
+print(handic.tokenize_hangul(text, mode="surface", dicdir=dicdir))
+print(handic.convert_text_to_hanja_hangul(text, dicdir=dicdir))
 ```
 
 **出力**
 
 ```python
-[('우리03', 'NP'), ('의10', 'JKG'), ('경애01', 'NNG'), ('하다02', 'XSV'), ('는03', 'ETM'), ('총비서', 'NNG'), ('동지006', 'NNG'), ('께서', 'JKS'), ('는01', 'JX'), ('어쩌면', 'MAG'), ('그리도', 'MAG'), ('위대02', 'XR'), ('하다02', 'XSA'), ('시', 'EP'), ('ㄴ가', 'EF'), ('.', 'SF')]
-['우리', '의', '경애', '하', '는', '총비서', '동지', '께서', '는', '어쩌면', '그리도', '위대', '하', '시', 'ㄴ가', '.']
-우리의 敬愛하는 總秘書同志께서는 어쩌면 그리도 偉大하신가.
+[('경애01', 'NNG'), ('하다02', 'XSV'), ('는03', 'ETM'), ('김06', 'NNP'), ('정은', 'NNP'), ('동지006', 'NNG'), ('께서', 'JKS'), ('는01', 'JX'), ('다음01', 'NNG'), ('과12', 'JKB'), ('같이', 'MAG'), ('말씀', 'NNG'), ('하다02', 'XSV'), ('시', 'EP'), ('ㅆ', 'EP'), ('다06', 'EF'), ('.', 'SF')]
+['경애', '하', '는', '김', '정은', '동지', '께서', '는', '다음', '과', '같이', '말씀', '하', '시여', 'ㅆ', '다', '.']
+敬愛하는 金정은同志께서는 다음과 같이 말씀하시였다.
 ```
 
-### Pythonパッケージ（`nkhandic`）
+`dicdir`を省略すると，`handic`パッケージに同梱されている現代韓国語辞書**HanDic**が使用されます．
 
-- PyPI: https://pypi.org/project/nkhandic/
+### Pythonパッケージ（`handic`）
+
+- GitHub: https://github.com/okikirmui/handic-py
+- PyPI: https://pypi.org/project/handic/
 - MeCab用Pythonラッパー（`mecab-python3`），ハングル字母の処理パッケージ（`jamotools`）とともに使用
+- 現代韓国語用分析辞書**HanDic**を同梱
 
 ## Dictionary Build
 
