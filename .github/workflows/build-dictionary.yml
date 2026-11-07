@@ -107,7 +107,7 @@ jobs:
              final/matrix.bin \
              final/char.bin \
              final/dicrc \
-             dist/handic/
+             dist/nkhandic/
 
       - name: Upload dictionary artifact
         uses: actions/upload-artifact@v4
